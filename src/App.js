@@ -2,6 +2,10 @@ function App() {
   return (
     <div className="wrapper clear">
 
+      <div className="drawer">
+        
+      </div>
+
       <header className="d-flex justify-between align-center p-40">
 
         <div className="d-flex align-center">
@@ -37,6 +41,10 @@ function App() {
         <div className="d-flex">
 
           <div className="card">
+            <div className="favorite">
+              <img src="icons/heart-liked.svg" alt="Liked" />
+            </div>
+            
             <img width={133} height={112} src="/img/sneakers/1.jpg" alt="Sneakers" />
             <h5>Мужские Кроссовки Nike Blazer Mid Suede</h5>
             <div className="d-flex justify-between align-center">
@@ -51,6 +59,7 @@ function App() {
           </div>
 
           <div className="card">
+            <img src="/icons/heart-unliked.svg" alt="Unliked" />
             <img width={133} height={112} src="/img/sneakers/2.jpg" alt="Sneakers" />
             <h5>Мужские Кроссовки Nike Blazer Mid Suede</h5>
             <div className="d-flex justify-between align-center">
