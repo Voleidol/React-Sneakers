@@ -70,6 +70,19 @@ header {
 
   display: flex;
   flex-direction: column;
+
+  @keyframes drawerAnimation {
+    0%  {
+      right: -500px;
+      top: -1000px;
+    }
+    100%  {
+      right: 0;
+      top: 0;
+    }
+  }
+
+  animation: drawerAnimation ease-in-out 0.4s;
   
   .items {
     flex: 1;
