@@ -11,11 +11,14 @@ function Header(props) {
 
       <ul className="d-flex">
         <li className="mr-30 cu-p" onClick={props.onClickCart}>
-          <img width={18} height={18} src="/icons/cart.svg" alt="Cart" />
+          <img width={18} height={18} src="/icons/cart.svg" alt="Корзина" />
           <span>1205 руб.</span>
         </li>
+        <li className="mr-20 cu-p">
+          <img width={18} height={18} src="/icons/favorites.svg" alt="Закладки" />
+        </li>
         <li>
-          <img width={18} height={18} src="/icons/user.svg" alt="User" />
+          <img width={18} height={18} src="/icons/user.svg" alt="Пользователь" />
         </li>
       </ul>
     </header>
