@@ -21,6 +21,9 @@ function App() {
       axios.get('https://6308abe346372013f583891c.mockapi.io/Cart').then(res => {
         setCartItems(res.data)
       });
+      axios.get('https://6308abe346372013f583891c.mockapi.io/favorite').then(res => {
+        setFavorites(res.data)
+      });
   }, []);
 
   const onAddToCart = (obj) => {
@@ -34,8 +37,14 @@ function App() {
   }
 
   const onAddToFavorite = (obj) => {
-    axios.post('https://6308abe346372013f583891c.mockapi.io/favorite', obj);
-    setFavorites((prev) => [...prev, obj]);
+    console.log(obj)
+    if (favorites.find(obj => obj.id === obj.id)) {
+      axios.delete(`https://6308abe346372013f583891c.mockapi.io/favorite/${obj.id}`);
+      setFavorites((prev) => [...prev, obj]);
+    } else {
+      axios.post('https://6308abe346372013f583891c.mockapi.io/favorite', obj);
+      setFavorites((prev) => prev.filter(item => item.id !== obj.id));
+    }  
   }
 
   const onChangeSearcInput = (event) => {
@@ -72,9 +81,8 @@ function App() {
         <Route
           path="/favorites"
           element={
-            <Favorites />}
+            <Favorites items={favorites} onAddToFavorite={onAddToFavorite} />}
           />
-          
       </Routes>
     </div>
   );
