@@ -2,44 +2,57 @@ import React from "react";
 import ContentLoader from "react-content-loader"
 import styles from "./Card.module.scss";
 
-function Card({id, onFavorite, imageUrl, title, price, onPlus, favorited = false, added = false, loading = false}) {
-
+function Card({
+  id,
+  onFavorite,
+  imageUrl,
+  title,
+  price,
+  onPlus,
+  favorited = false,
+  added = false,
+  loading = false,
+}) {
+  console.log(title, added)
   const [isAdded, setIsAdded] = React.useState(added);
   const [isFavorite, setIsFavorite] = React.useState(favorited);
 
   const onClickPlus = () => {
-    onPlus({id, imageUrl, title, price})
-    setIsAdded(!isAdded)
-  }
+    onPlus({ id, imageUrl, title, price });
+    setIsAdded(!isAdded);
+  };
 
   const onClickFavorite = () => {
-    onFavorite({id, imageUrl, title, price})
-    setIsFavorite(!isFavorite)
-  }
+    onFavorite({ id, imageUrl, title, price });
+    setIsFavorite(!isFavorite);
+  };
 
   return (
     <div className={styles.card}>
-      {
-        loading ? 
-        <ContentLoader 
-        speed={2}
-        width={165}
-        height={250}
-        viewBox="0 0 155 265"
-        backgroundColor="#f3f3f3"
-        foregroundColor="#ecebeb"
-       
-      >
-        <rect x="0" y="0" rx="10" ry="10" width="155" height="155" /> 
-        <rect x="0" y="167" rx="5" ry="5" width="155" height="15" /> 
-        <rect x="0" y="187" rx="5" ry="5" width="100" height="15" /> 
-        <rect x="0" y="234" rx="5" ry="5" width="80" height="25" />
-        <rect x="124" y="230" rx="10" ry="10" width="32" height="32" /> 
-      </ContentLoader>
-      :
+      {loading ? (
+        <ContentLoader
+          speed={2}
+          width={165}
+          height={250}
+          viewBox="0 0 155 265"
+          backgroundColor="#f3f3f3"
+          foregroundColor="#ecebeb"
+        >
+          <rect x="0" y="0" rx="10" ry="10" width="155" height="155" />
+          <rect x="0" y="167" rx="5" ry="5" width="155" height="15" />
+          <rect x="0" y="187" rx="5" ry="5" width="100" height="15" />
+          <rect x="0" y="234" rx="5" ry="5" width="80" height="25" />
+          <rect x="124" y="230" rx="10" ry="10" width="32" height="32" />
+        </ContentLoader>
+      ) : (
         <>
           <div className={styles.favorite} onClick={onClickFavorite}>
-          <img src={isFavorite ? "icons/heart-liked.svg" : "icons/heart-unliked.svg"} alt="Unliked" />
+            <img
+              src={
+                isFavorite ? "icons/heart-liked.svg" : "icons/heart-unliked.svg"
+              }
+              alt="Unliked"
+            />
           </div>
 
           <img width="100%" height={135} src={imageUrl} alt="Sneakers" />
@@ -49,10 +62,15 @@ function Card({id, onFavorite, imageUrl, title, price, onPlus, favorited = false
               <span>Цена:</span>
               <b>{price} руб.</b>
             </div>
-            <img className={styles.plus} onClick={onClickPlus} src={isAdded ? "/icons/btn-checked.svg" : "/icons/btn-plus.svg"} alt="" />
+            <img
+              className={styles.plus}
+              onClick={onClickPlus}
+              src={isAdded ? "/icons/btn-checked.svg" : "/icons/btn-plus.svg"}
+              alt=""
+            />
           </div>
-        </>   
-      }
+        </>
+      )}
     </div>
   );
 }

@@ -1,26 +1,37 @@
 import React from "react";
 import Card from "../components/Card";
+import AppContext from "../context";
 
-function Home({items, cartItems, searchValue, setSearchValue, onChangeSearcInput, onAddToFavorite, onAddToCart, isLoading}) {
+function Home({
+  items,
+  cartItems,
+  searchValue,
+  setSearchValue,
+  onChangeSearcInput,
+  onAddToFavorite,
+  onAddToCart,
+  isLoading,
+}) {
+  const filteredItems = items.filter((item) =>
+    item.title.toLowerCase().includes(searchValue.toLowerCase())
+  );
 
-  const filteredItems = items.filter((item) => item.title.toLowerCase().includes(searchValue.toLowerCase()));
-  
-  const renderItems = () => { 
-    return (isLoading ? [...Array(12)] : filteredItems)
-      .map((item, index) => (
-        <Card
-          key={index}
-          onFavorite={(obj) => onAddToFavorite(obj)}
-          onPlus={(obj) => onAddToCart(obj)}
-          added={cartItems.some((obj) => Number(obj.id) === Number(item.id))}
-          loading={isLoading}
-          {...item}
-        />
-      ));
+  const {isItemAdded} = React.useContext(AppContext);
+
+  const renderItems = () => {
+    return (isLoading ? [...Array(12)] : filteredItems).map((item, index) => (
+      <Card
+        key={index}
+        onFavorite={(obj) => onAddToFavorite(obj)}
+        onPlus={(obj) => onAddToCart(obj)}
+        added={isItemAdded(item && item.id)}
+        loading={isLoading}
+        {...item}
+      />
+    ));
   };
 
   return (
-
     <div className="content p-40">
       <div className="d-flex align-center justify-between mb-40">
         <h1>
@@ -44,9 +55,7 @@ function Home({items, cartItems, searchValue, setSearchValue, onChangeSearcInput
         </div>
       </div>
 
-      <div className="d-flex flex-wrap">
-        {renderItems()}
-      </div>
+      <div className="d-flex flex-wrap">{renderItems()}</div>
     </div>
   );
 }
