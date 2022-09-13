@@ -11,14 +11,13 @@ function Card({
   price,
   onPlus,
   favorited = false,
-  added = false,
   loading = false,
 }) {
 
   const {isItemAdded} = React.useContext(AppContext);
   const [isFavorite, setIsFavorite] = React.useState(favorited);
 
-  console.log(isItemAdded)
+  console.log(title, isItemAdded(id))
 
   const onClickPlus = () => {
     onPlus({ id, imageUrl, title, price });
@@ -67,7 +66,7 @@ function Card({
             <img
               className={styles.plus}
               onClick={onClickPlus}
-              src={false ? "/icons/btn-checked.svg" : "/icons/btn-plus.svg"}
+              src={isItemAdded(id) ? "/icons/btn-checked.svg" : "/icons/btn-plus.svg"}
               alt="Plus"
             />
           </div>

@@ -50,8 +50,9 @@ function App() {
 
   const onAddToFavorite = async (obj) => {
     try {
-      if (favorites.find((favObj) => favObj.id === obj.id)) {
+      if (favorites.find((favObj) => Number(favObj.id) === Number(obj.id))) {
         axios.delete(`https://6308abe346372013f583891c.mockapi.io/favorite/${obj.id}`);
+        setFavorites(prev => prev.filter(item => item.id !== obj.id));
       } else {
         const { data } = await axios.post('https://6308abe346372013f583891c.mockapi.io/favorite', obj);
         console.log(data)
@@ -66,12 +67,12 @@ function App() {
     setSearchValue(event.target.value);
   }
 
- const isItemAdded =(id) => {
+ const isItemAdded = (id) => {
   return cartItems.some((obj) => Number(obj.id) === Number(id))
  } 
   
   return (
-    <AppContext.Provider value={{items, cartItems, favorites, isItemAdded}}>
+    <AppContext.Provider value={{items, cartItems, favorites, isItemAdded, onAddToFavorite, setCartOpened, setCartItems}}>
       <div className="wrapper clear">
         {cartOpened && (
           <Drawer
@@ -102,7 +103,7 @@ function App() {
           <Route
             path="/favorites"
             element={
-              <Favorites onAddToFavorite={onAddToFavorite} />
+              <Favorites />
             }
           />
         </Routes>
