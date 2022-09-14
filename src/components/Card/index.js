@@ -17,7 +17,7 @@ function Card({
   const {isItemAdded} = React.useContext(AppContext);
   const [isFavorite, setIsFavorite] = React.useState(favorited);
 
-  console.log(title, isItemAdded(id))
+  // console.log(title, isItemAdded(id))
 
   const onClickPlus = () => {
     onPlus({ id, imageUrl, title, price });
@@ -47,14 +47,14 @@ function Card({
         </ContentLoader>
       ) : (
         <>
-          <div className={styles.favorite} onClick={onClickFavorite}>
+          {onFavorite && (<div className={styles.favorite} onClick={onClickFavorite}>
             <img
               src={
                 isFavorite ? "icons/heart-liked.svg" : "icons/heart-unliked.svg"
               }
               alt="Unliked"
             />
-          </div>
+          </div>)}
 
           <img width="100%" height={135} src={imageUrl} alt="Sneakers" />
           <h5>{title}</h5>
@@ -63,12 +63,12 @@ function Card({
               <span>Цена:</span>
               <b>{price} руб.</b>
             </div>
-            <img
+            {onPlus &&(<img
               className={styles.plus}
               onClick={onClickPlus}
               src={isItemAdded(id) ? "/icons/btn-checked.svg" : "/icons/btn-plus.svg"}
               alt="Plus"
-            />
+            />)}
           </div>
         </>
       )}
