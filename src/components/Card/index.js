@@ -65,7 +65,7 @@ function Card({
             {onPlus &&(<img
               className={styles.plus}
               onClick={onClickPlus}
-              src={isItemAdded(id) ? "/icons/btn-checked.svg" : "/icons/btn-plus.svg"}
+              src={isItemAdded(id) ? "icons/btn-checked.svg" : "icons/btn-plus.svg"}
               alt="Plus"
             />)}
           </div>
